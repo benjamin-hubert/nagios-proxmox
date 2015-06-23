@@ -17,12 +17,10 @@ foreach $node ( @{$nodes})
    $mem       = nearest(.1, $node->{mem} / $node->{maxmem} * 100);
 
    $statusStr .= $node->{name}." : ";
-
-   if ($node->{status} == 'running') {
+   if ($node->{status} eq "running") {
       $statusStr .= "CPU ".$cpu."% - ";
       $statusStr .= "Disk ".$disk."% - ";
       $statusStr .= "RAM ".$mem."%";
-#      $statusStr .= "\n";
 
       if(cpu > 90 || disk > 85 || mem > 90) {
         $status = 2;
@@ -30,7 +28,7 @@ foreach $node ( @{$nodes})
   } else {
       $statusStr .= "STOPPED";
   }
-
+  $statusStr .= "\n";
 }
 
 print $statusStr;
